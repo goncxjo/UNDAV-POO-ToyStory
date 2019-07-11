@@ -22,4 +22,16 @@ public class Atributos {
     public boolean tieneBrazos() {
         return tieneBrazos;
     }
+
+    public void setAntiguedad(int antiguedad) {
+        this.antiguedad = antiguedad;
+    }
+
+    public void setPorcentajeMetal(double porcentajeMetal) {
+        this.porcentajeMetal = porcentajeMetal;
+    }
+
+    public void setTieneBrazos(boolean tieneBrazos) {
+        this.tieneBrazos = tieneBrazos;
+    }
 }

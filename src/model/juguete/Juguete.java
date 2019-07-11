@@ -3,20 +3,21 @@ package model.juguete;
 import model.juguete.elemento.Elemento;
 import model.marciano.Marciano;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Juguete {
     private Atributos atributos;
-    private List<Elemento> elementos;
+    private List<Elemento> elementos = new ArrayList();
     private int monedas;
 
     public void atacar(Marciano marciano) {
-        double monedasObtenidas = 0;
         double ataqueTotal = this.getPuntosAtaque();
+
         if(marciano.fueEliminado(ataqueTotal)) {
-            monedasObtenidas = marciano.darMonedas(ataqueTotal);
+            double monedasObtenidas = marciano.darMonedas(ataqueTotal);
+            this.sumarMonedas(monedasObtenidas);
         }
-        this.sumarMonedas(monedasObtenidas);
     }
 
     public double getPuntosAtaque() {
@@ -43,5 +44,9 @@ public class Juguete {
 
     private void sumarMonedas(double monedas) {
         this.monedas += monedas;
+    }
+
+    public void setAtributos(Atributos atributos) {
+        this.atributos = atributos;
     }
 }

@@ -4,7 +4,7 @@ import model.juguete.Atributos;
 
 public class Palo extends Elemento {
 
-    public Palo(int puntosAtaque) {
+    public Palo() {
         super(10);
     }
 
