@@ -6,24 +6,21 @@ import model.marciano.Marciano;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Juguete {
+public class Juguete extends Aliado {
     private Atributos atributos;
     private List<Elemento> elementos = new ArrayList();
     private int monedas;
 
-    public void atacar(Marciano marciano) {
-        double ataqueTotal = this.getPuntosAtaque();
-
-        if(marciano.fueEliminado(ataqueTotal)) {
-            double monedasObtenidas = marciano.darMonedas(ataqueTotal);
-            this.sumarMonedas(monedasObtenidas);
-        }
-    }
-
+    @Override
     public double getPuntosAtaque() {
         return elementos.stream()
                 .mapToDouble(e -> e.bonificacion(this.getAtributos()))
                 .sum();
+    }
+
+    @Override
+    public int getMonedas() {
+        return this.monedas;
     }
 
     public void equipar(Elemento elemento) {
@@ -38,12 +35,8 @@ public class Juguete {
         return elementos;
     }
 
-    public int getMonedas() {
-        return this.monedas;
-    }
-
-    private void sumarMonedas(double monedas) {
-        this.monedas += monedas;
+    public void sumarMonedas(int cantidad) {
+        this.monedas += cantidad;
     }
 
     public void setAtributos(Atributos atributos) {

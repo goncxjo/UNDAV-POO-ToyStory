@@ -3,6 +3,7 @@ package model.marciano;
 import model.juguete.Juguete;
 import model.juguete.JugueteBuilder;
 import model.juguete.elemento.Elemento;
+import model.juguete.elemento.Laser;
 import model.juguete.elemento.Lazo;
 import model.juguete.elemento.Palo;
 import org.junit.Test;
@@ -12,30 +13,20 @@ import static org.junit.Assert.*;
 public class MarcianoTest {
 
     @Test
-    public void fueEliminado_MarcianoSigueVivo() {
-        Juguete juguete = new JugueteBuilder().build(); // por defecto, no tiene brazos
-        Elemento lazo = new Lazo(20);
+    public void fueEliminado_MarcianoEsEliminado() {
+        Juguete juguete = new JugueteBuilder().agregarBrazos().build(); // por defecto, no tiene brazos
+        Elemento lazo = new Lazo(15);
         juguete.equipar(lazo);
         Marciano marcianito = new Comun(); // vida = 10
-        assertFalse("IT'S ALIVE!!!", marcianito.fueEliminado(juguete.getPuntosAtaque()));
+        assertTrue("El marciano sigue vivo", marcianito.fueEliminado(juguete.getPuntosAtaque()));
     }
 
     @Test
-    public void atacar_JugueteObtiene15Monedas() {
-        Juguete juguete = new JugueteBuilder().antiguedad(10).agregarBrazos().build();
-
-        Elemento palo1 = new Palo(); // +10 de ataque
-        Elemento palo2 = new Palo(); // +10 de ataque
-        Elemento palo3 = new Palo(); // +10 de ataque
-        juguete.equipar(palo1);
-        juguete.equipar(palo2);
-        juguete.equipar(palo3);
-
-        Marciano marcianito = new Comun(); // vida = 10
-        double monedasAntes = juguete.getMonedas();
-        juguete.atacar(marcianito);
-        double monedasDespues = juguete.getMonedas();
-
-        assertEquals("El juguete no obtuvo 15 monedas", 15, monedasDespues - monedasAntes, 0.0);
+    public void fueEliminado_GarraNoPuedeSerEliminado() {
+        Juguete juguete = new JugueteBuilder().porcentajeMetal(100).build(); // por defecto, no tiene brazos
+        Elemento laser = new Laser(999);
+        juguete.equipar(laser);
+        Marciano marcianito = new Garra();
+        assertFalse("IT'S ALIVE!!!", marcianito.fueEliminado(juguete.getPuntosAtaque()));
     }
 }

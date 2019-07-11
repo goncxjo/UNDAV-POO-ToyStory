@@ -10,6 +10,6 @@ public class Laser extends Elemento {
 
     @Override
     public double bonificacion(Atributos atributos) {
-        return getPuntosAtaque() * atributos.getPorcentajeMetal();
+        return getPuntosAtaque() * atributos.getPorcentajeMetal() / 100;
     }
 }
